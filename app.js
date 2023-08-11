@@ -4,23 +4,18 @@ const express=require('express');
 const bodyParser=require('body-parser')
 
 const app=express()
+
+const adminRoutes=require('./router/admin')
+
+const userRoutes=require('./router/user')
+
 app.use(bodyParser.urlencoded({extended:false}))
 
-app.use('/',(req,res,next)=>{
-    next()
-})
+app.use('/admin',adminRoutes)
 
-app.use('/add',(req,res,next)=>{
-    res.send('<form action="/product" method="POST"><input type="text" name="title"><input type="text" name="size"><button type="submit">ADD PRODUCT</button></form>')
-})
+app.use(userRoutes)
 
-app.post('/product',(req,res,next)=>{
-    console.log(req.body)
-    res.redirect('/')
+app.use((req,res,next)=>{
+    res.status(404).send('<h1>Page Not Found</h1>');
 })
-
-app.use('/',(req,res,next)=>{
-    res.send('<h1>hello from node.js</h1>')
-})
-
 app.listen(4000);
