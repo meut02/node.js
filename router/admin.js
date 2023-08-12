@@ -1,13 +1,12 @@
-const express=require('express');
+const express = require('express');
 
-const router=express.Router();
+const router = express.Router();
 
-router.get('/add-product',(req,res,next)=>{
-    res.send('<form action="/admin/add-product" method="POST"><input type="text" name="title"><input type="text" name="size"><button type="submit">ADD PRODUCT</button></form>')
+router.get('/login', (req, res, next) => {
+    res.send('<form onsubmit="localStorage.setItem(`username`,document.getElementById(`username`).value)" action="/product" method="POST"><input type="text" id="username" name="title"><button type="submit">ADD USER</button></form>')
 })
 
-router.post('/add-product',(req,res,next)=>{
-    console.log(req.body)
+router.post('/product', (req, res, next) => {
     res.redirect('/')
 })
 
@@ -15,4 +14,4 @@ router.post('/add-product',(req,res,next)=>{
 
 
 
-module.exports=router
+module.exports = router
